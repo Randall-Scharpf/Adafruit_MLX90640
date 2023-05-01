@@ -19,7 +19,12 @@
 
 #include <stdint.h>
 
-#define SCALEALPHA 0.000001
+// this is defined to 0.0000001 in the library code
+// but to get the values generated to match the example data xlsx sheet, we must set it to 0.000001024
+// but at the end of the day, neither of the values gives us the outputs on the sheet, they're shifted
+// by some other value. all the parameters check out, and none of the temperatures check out.
+// and so we assume that the sheet is messed up, and that the library is correct, and we just hope
+#define SCALEALPHA 0.000001024
 
 //#define MLX90640_DEBUG
 

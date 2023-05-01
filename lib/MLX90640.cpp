@@ -48,8 +48,7 @@ void MLX90640_DataProcessor::decodeFrame(uint8_t frameData[1672], float framePix
         // For a MLX90640 in the open air the shift is 8 degC.
         tr = MLX90640_GetTa(frameData16, &_params) - OPENAIR_TA_SHIFT;
 #ifdef MLX90640_DEBUG
-        Serial.print("Tr = ");
-        Serial.println(tr, 8);
+        printf("Tr = %.8f\r\n", tr);
 #endif
         MLX90640_CalculateTo(frameData16, &_params, emissivity, tr, framePixels);
     }
