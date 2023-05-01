@@ -65,11 +65,16 @@ int main() {
     loadFile(ee_fname, eeData, 1664);
     MLX90640_DataProcessor proc;
     proc.loadCalibration(eeData);
+
     uint8_t frameData[1672] = {0};
-    char frame_fname[] = "frame_data.hex";
-    loadFile(frame_fname, frameData, 1672);
     float pixels[768] = {0};
+    char frame1_fname[] = "frame1_data.hex";
+    loadFile(frame1_fname, frameData, 1672);
     proc.decodeFrame(frameData, pixels);
+    char frame2_fname[] = "frame2_data.hex";
+    loadFile(frame2_fname, frameData, 1672);
+    proc.decodeFrame(frameData, pixels);
+
     for (int i = 0; i < 24; i++) {
         for (int j = 0; j < 32; j++) {
             fprintf(stdout, "%.5f%s", pixels[i*32+j], j==31?"\n":" ");
