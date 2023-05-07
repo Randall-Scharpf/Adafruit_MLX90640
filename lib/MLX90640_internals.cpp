@@ -72,7 +72,7 @@ void MLX90640_CalculateTo(
     float result[768]
 ) {
 
-    uint16_t subPage = frameData[833];
+    uint16_t subPage = frameData[833] & 0xfff7;
     float vdd = MLX90640_GetVdd(frameData, params);
     float ta = MLX90640_GetTa(frameData, params);
 
@@ -130,7 +130,7 @@ void MLX90640_CalculateTo(
         } else {
             pattern = chessPattern; 
         }
-        if (pattern == frameData[833]) {
+        if (pattern == (frameData[833] & 0xfff7)) {
             float irData = frameData[pixelNumber];
             if (irData > 32767) {
                 irData = irData - 65536;
@@ -222,7 +222,7 @@ float MLX90640_GetTa(uint16_t *frameData, const paramsMLX90640 *params) {
 
 int MLX90640_GetSubPageNumber(uint16_t *frameData)
 {
-    return frameData[833];
+    return frameData[833] & 0xfff7;
 }
 
 //------------------------------------------------------------------------------

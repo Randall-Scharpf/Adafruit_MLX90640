@@ -1,6 +1,8 @@
 #include "MLX90640_internals.h"
 #include "MLX90640.h"
 
+#include <cstdio>
+
 /*!
  *    @brief  Instantiates a new MLX90640 class
  */
@@ -47,6 +49,7 @@ void MLX90640_DataProcessor::decodeFrame(uint8_t frameData[1672], float framePix
 #endif
         // For a MLX90640 in the open air the shift is 8 degC.
         tr = MLX90640_GetTa(frameData16, &_params) - OPENAIR_TA_SHIFT;
+        fprintf(stderr, "Ambient Temperature is %f\r\n", tr + OPENAIR_TA_SHIFT);
 #ifdef MLX90640_DEBUG
         printf("Tr = %.8f\r\n", tr);
 #endif
